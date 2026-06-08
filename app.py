@@ -337,13 +337,19 @@ if submitted:
 
     readable  = [FEATURE_LABELS.get(f, f) for f in FEATURE_COLS]
     raw_vals  = sv.values
-    # TreeExplainer on binary RF returns shape (n_features, 2); take fraud class
+    # TreeExplainer on binary RF returns shape (n_features, 2); take fraud class (index 1)
     vals      = raw_vals[:, 1] if raw_vals.ndim == 2 else raw_vals
     order     = np.argsort(np.abs(vals))[::-1]
 
     sorted_vals   = vals[order]
-    sorted_labels = [readable[int(i) % len(readable)] for i in order]
-    y_pos = range(len(sorted_vals) - 1, -1, -1)
+    sorted_labels = [readable[int(i)] for i in order]
+    colors        = ["#f85149" if v > 0 else "#58a6ff" for v in sorted_vals]
+    y_pos         = range(len(sorted_vals) - 1, -1, -1)
+
+    fig, ax = plt.subplots(figsize=(9, 6))
+    fig.patch.set_facecolor("#0e1117")
+    ax.set_facecolor("#161b22")
+
     ax.barh(list(y_pos), sorted_vals[::-1], color=colors[::-1], height=0.65, zorder=2)
     ax.set_yticks(list(y_pos))
     ax.set_yticklabels(sorted_labels[::-1], color="#c9d1d9", fontsize=8)
@@ -372,7 +378,7 @@ if submitted:
         display_df = pd.DataFrame({
             "Feature":    [FEATURE_LABELS.get(f, f) for f in FEATURE_COLS],
             "Value":      [float(input_data[f].iloc[0]) for f in FEATURE_COLS],
-            "SHAP Value": [round(float(sv.values[i]), 5) for i in range(len(FEATURE_COLS))],
+            "SHAP Value": [round(float(vals[i]), 5) for i in range(len(FEATURE_COLS))],
         })
         st.dataframe(
             display_df.style
