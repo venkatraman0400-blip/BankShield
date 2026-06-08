@@ -340,12 +340,7 @@ if submitted:
     order     = np.argsort(np.abs(vals))[::-1]
 
     sorted_vals   = vals[order]
-    readable      = [FEATURE_LABELS.get(f, f) for f in FEATURE_COLS]
-    vals          = sv.values
-    order         = np.argsort(np.abs(vals))[::-1]
-    sorted_vals   = vals[order]
     sorted_labels = [readable[i % len(readable)] for i in order]
-
     y_pos = range(len(sorted_vals) - 1, -1, -1)
     ax.barh(list(y_pos), sorted_vals[::-1], color=colors[::-1], height=0.65, zorder=2)
     ax.set_yticks(list(y_pos))
