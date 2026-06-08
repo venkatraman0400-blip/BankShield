@@ -335,8 +335,10 @@ if submitted:
     shap_values = explainer(input_data)
     sv = shap_values[0]
 
-    readable = [FEATURE_LABELS.get(f, f) for f in FEATURE_COLS]
-    vals      = sv.values
+    readable  = [FEATURE_LABELS.get(f, f) for f in FEATURE_COLS]
+    raw_vals  = sv.values
+    # TreeExplainer on binary RF returns shape (n_features, 2); take fraud class
+    vals      = raw_vals[:, 1] if raw_vals.ndim == 2 else raw_vals
     order     = np.argsort(np.abs(vals))[::-1]
 
     sorted_vals   = vals[order]
