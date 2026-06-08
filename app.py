@@ -340,7 +340,7 @@ if submitted:
     order     = np.argsort(np.abs(vals))[::-1]
 
     sorted_vals   = vals[order]
-    sorted_labels = [readable[i] for i in order if i < len(readable)]
+    sorted_labels = [readable[i % len(readable)] for i in order]
     colors        = ["#f85149" if v > 0 else "#58a6ff" for v in sorted_vals]
 
     fig, ax = plt.subplots(figsize=(8, 5))
