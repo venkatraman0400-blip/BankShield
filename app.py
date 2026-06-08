@@ -340,12 +340,12 @@ if submitted:
     order     = np.argsort(np.abs(vals))[::-1]
 
     sorted_vals   = vals[order]
-    sorted_labels = [readable[i % len(readable)] for i in order]
-    colors        = ["#f85149" if v > 0 else "#58a6ff" for v in sorted_vals]
+    readable      = [FEATURE_LABELS.get(f, f) for f in FEATURE_COLS]
+        vals          = sv.values
+        order         = np.argsort(np.abs(vals))[::-1]
 
-    fig, ax = plt.subplots(figsize=(8, 5))
-    fig.patch.set_facecolor("#0e1117")
-    ax.set_facecolor("#161b22")
+        sorted_vals   = vals[order]
+        sorted_labels = [readable[i % len(readable)] for i in order]
 
     y_pos = range(len(sorted_vals) - 1, -1, -1)
     ax.barh(list(y_pos), sorted_vals[::-1], color=colors[::-1], height=0.65, zorder=2)
