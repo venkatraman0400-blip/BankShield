@@ -1,0 +1,47 @@
+# ── Dataset (generated locally by generate_data.py — never commit raw data) ──
+data/
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual environments ───────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ── Environment variables ─────────────────────────────────────────────────────
+.env
+.env.*
+*.env
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Logs & temp ───────────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+
+# NOTE: models/ is intentionally NOT ignored.
+# models/model.pkl and models/feature_names.pkl must be committed
+# so Streamlit Cloud can serve predictions without retraining.
